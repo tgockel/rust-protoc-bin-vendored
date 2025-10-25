@@ -1,6 +1,6 @@
 [package]
 name = "@@CRATE_NAME@@"
-version = "@@CRATE_VERSION@@"
+version.workspace = true
 edition = "2021"
 authors = ["Stepan Koltsov <stepan.koltsov@gmail.com>"]
 license = "MIT"

@@ -6,8 +6,6 @@ set -ex
 
 cd "$(dirname "$0")"
 
-crate_version=$(cat protoc-bin-vendored/Cargo.toml | sed -n -e 's/^version = "\([^"]*\)"/\1/p')
-
 tag_name=$(curl -s https://api.github.com/repos/protocolbuffers/protobuf/releases/latest | grep tag_name | cut -d '"' -f 4)
 echo "$tag_name" >protoc-bin-vendored/version.txt
 echo "updating protoc binaries to version $tag_name" >&2
@@ -30,7 +28,6 @@ update_arch() {
     for file in Cargo.toml src/lib.rs; do
         sed -i~ -e "
             s/@@CRATE_NAME@@/$crate/
-            s/@@CRATE_VERSION@@/$crate_version/
             s/@@ARCH@@/$arch/
             s/@@EXE_SUFFIX@@/$exe_suffix/
         " "$crate/$file"
